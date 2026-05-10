@@ -32,6 +32,7 @@ const SECTIONS = [
     subtitle: 'Life path numbers 1-9 + master numbers',
     icon: 'calculator-outline' as const,
     color: colors.cyan,
+    route: '/numerology',
   },
   {
     title: 'Moon Phases',

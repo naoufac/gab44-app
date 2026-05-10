@@ -19,6 +19,7 @@ export default function RootLayout() {
         <Stack.Screen name="tarot/[slug]" options={{ title: 'Tarot Card' }} />
         <Stack.Screen name="council/ask" options={{ title: 'Ask the Council' }} />
         <Stack.Screen name="tarot/daily" options={{ title: 'Daily Card Draw' }} />
+        <Stack.Screen name="numerology" options={{ title: 'Numerology' }} />
       </Stack>
     </>
   )
