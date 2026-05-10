@@ -115,10 +115,10 @@ export default function TodayScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionBtn}
-          onPress={() => router.push('/(tabs)/explore')}
+          onPress={() => router.push('/tarot/daily')}
         >
-          <Text style={styles.actionEmoji}>{'\u2728'}</Text>
-          <Text style={styles.actionLabel}>Explore</Text>
+          <Text style={styles.actionEmoji}>{'\u{1F0CF}'}</Text>
+          <Text style={styles.actionLabel}>Daily Card</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionBtn}

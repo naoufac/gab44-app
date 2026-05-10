@@ -18,6 +18,7 @@ export default function RootLayout() {
         <Stack.Screen name="zodiac/[sign]" options={{ title: 'Sign Details' }} />
         <Stack.Screen name="tarot/[slug]" options={{ title: 'Tarot Card' }} />
         <Stack.Screen name="council/ask" options={{ title: 'Ask the Council' }} />
+        <Stack.Screen name="tarot/daily" options={{ title: 'Daily Card Draw' }} />
       </Stack>
     </>
   )

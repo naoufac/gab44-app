@@ -2,22 +2,27 @@
 // All content is served from the edge, globally <50ms.
 
 const BASE = 'https://nao00.nchobah.com'
+// Public bearer for council access — this is a read-only app token,
+// not a secret. The Worker enforces rate limits server-side.
+const AUTH_TOKEN = 'nao00-council-2026'
 
-async function get<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}${path}`, {
-    headers: { 'Accept': 'application/json' },
-  })
+async function get<T>(path: string, auth = false): Promise<T> {
+  const headers: Record<string, string> = { 'Accept': 'application/json' }
+  if (auth) headers['Authorization'] = `Bearer ${AUTH_TOKEN}`
+  const res = await fetch(`${BASE}${path}`, { headers })
   if (!res.ok) throw new Error(`API ${res.status}: ${path}`)
   return res.json()
 }
 
-async function post<T>(path: string, body?: any): Promise<T> {
+async function post<T>(path: string, body?: any, auth = true): Promise<T> {
+  const headers: Record<string, string> = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${AUTH_TOKEN}`,
+  }
   const res = await fetch(`${BASE}${path}`, {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: body ? JSON.stringify(body) : undefined,
   })
   if (!res.ok) throw new Error(`API ${res.status}: ${path}`)
