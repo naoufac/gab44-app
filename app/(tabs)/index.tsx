@@ -7,6 +7,7 @@ import { Card } from '../../src/components/Card'
 import { SignPicker } from '../../src/components/SignPicker'
 import { useUserSign } from '../../src/store'
 import { getDailyHoroscope, capitalize, SIGN_EMOJI, type Sign, type DailyHoroscope } from '../../src/api/client'
+import { getTodayMoon } from '../../src/data/moon'
 import { colors, spacing, radius } from '../../src/theme'
 
 export default function TodayScreen() {
@@ -77,6 +78,23 @@ export default function TodayScreen() {
           {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
         </Text>
       </View>
+
+      {/* Moon phase widget */}
+      {(() => {
+        const moon = getTodayMoon()
+        return (
+          <Card style={{ marginBottom: spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontSize: 36, marginRight: 14 }}>{moon.emoji}</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontSize: 15, fontWeight: '700', color: colors.fg }}>{moon.label}</Text>
+                <Text style={{ fontSize: 13, color: colors.fgDim, marginTop: 2 }}>{moon.message}</Text>
+                <Text style={{ fontSize: 11, color: colors.fgMuted, marginTop: 4 }}>{moon.illumination}% illuminated</Text>
+              </View>
+            </View>
+          </Card>
+        )
+      })()}
 
       {/* Sign switcher */}
       <SignPicker selected={sign} onSelect={setSign} compact />
