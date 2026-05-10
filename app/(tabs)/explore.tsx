@@ -106,6 +106,14 @@ export default function ExploreScreen() {
           </Card>
         </TouchableOpacity>
       ))}
+
+      {/* About */}
+      <TouchableOpacity
+        style={styles.aboutBtn}
+        onPress={() => router.push('/about')}
+      >
+        <Text style={styles.aboutText}>About Gab44</Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }
@@ -134,4 +142,6 @@ const styles = StyleSheet.create({
   topicText: { flex: 1 },
   topicTitle: { fontSize: 16, fontWeight: '700', color: colors.fg },
   topicSub: { fontSize: 13, color: colors.fgDim, marginTop: 2 },
+  aboutBtn: { marginTop: spacing.xl, alignSelf: 'center', paddingVertical: 12 },
+  aboutText: { fontSize: 14, color: colors.fgMuted, fontWeight: '600' },
 })

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import {
-  View, Text, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, RefreshControl,
+  View, Text, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, RefreshControl, Share,
 } from 'react-native'
 import { useRouter } from 'expo-router'
 import { Card } from '../../src/components/Card'
@@ -116,9 +116,19 @@ export default function TodayScreen() {
         <Card featured style={{ marginTop: spacing.lg }}>
           <Text style={styles.cardTitle}>Today's Reading</Text>
           <Text style={styles.horoscopeText}>{horoscope.text}</Text>
-          <Text style={styles.source}>
-            {horoscope.source === 'fallback-pool' ? 'curated' : 'fresh'} reading
-          </Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 12 }}>
+            <Text style={styles.source}>
+              {horoscope.source === 'fallback-pool' ? 'curated' : 'fresh'} reading
+            </Text>
+            <TouchableOpacity
+              onPress={() => Share.share({
+                message: `${SIGN_EMOJI[sign]} ${capitalize(sign)} — ${horoscope.date}\n\n${horoscope.text}\n\nvia gab44`,
+              })}
+              style={{ paddingHorizontal: 14, paddingVertical: 6, backgroundColor: colors.bgMuted, borderRadius: 999 }}
+            >
+              <Text style={{ fontSize: 12, fontWeight: '600', color: colors.accent }}>Share</Text>
+            </TouchableOpacity>
+          </View>
         </Card>
       ) : null}
 

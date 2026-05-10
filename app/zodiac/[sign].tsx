@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import {
-  View, Text, ScrollView, StyleSheet, ActivityIndicator, TouchableOpacity,
+  View, Text, ScrollView, StyleSheet, ActivityIndicator, TouchableOpacity, Share,
 } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Card } from '../../src/components/Card'
@@ -89,6 +89,14 @@ export default function SignDetail() {
           <Card featured style={{ marginTop: spacing.lg }}>
             <Text style={styles.sectionTitle}>Today's Reading</Text>
             <Text style={styles.readingText}>{horoscope.text}</Text>
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => Share.share({
+                message: `${SIGN_EMOJI[s]} ${capitalize(s)} — ${horoscope.date}\n\n${horoscope.text}\n\nvia gab44`,
+              })}
+            >
+              <Text style={styles.shareText}>Share</Text>
+            </TouchableOpacity>
           </Card>
         ) : null}
 
@@ -150,4 +158,6 @@ const styles = StyleSheet.create({
   },
   otherEmoji: { fontSize: 22 },
   otherName: { fontSize: 11, fontWeight: '600', color: colors.fg, marginTop: 4 },
+  shareBtn: { marginTop: 14, alignSelf: 'flex-end', paddingHorizontal: 16, paddingVertical: 8, backgroundColor: colors.bgMuted, borderRadius: radius.full },
+  shareText: { fontSize: 13, fontWeight: '600', color: colors.accent },
 })
