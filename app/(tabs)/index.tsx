@@ -5,7 +5,7 @@ import {
 import { useRouter } from 'expo-router'
 import { Card } from '../../src/components/Card'
 import { SignPicker } from '../../src/components/SignPicker'
-import { useUserSign } from '../../src/store'
+import { useUserSign, saveToJournal } from '../../src/store'
 import { getDailyHoroscope, capitalize, SIGN_EMOJI, type Sign, type DailyHoroscope } from '../../src/api/client'
 import { getTodayMoon } from '../../src/data/moon'
 import { colors, spacing, radius } from '../../src/theme'
@@ -24,6 +24,7 @@ export default function TodayScreen() {
     try {
       const h = await getDailyHoroscope(s)
       setHoroscope(h)
+      saveToJournal(h).catch(() => {})
     } catch (e: any) {
       setError(e.message)
     } finally {
@@ -154,6 +155,13 @@ export default function TodayScreen() {
         >
           <Text style={styles.actionEmoji}>{'\u{1F52E}'}</Text>
           <Text style={styles.actionLabel}>Ask Council</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.actionBtn}
+          onPress={() => router.push('/journal')}
+        >
+          <Text style={styles.actionEmoji}>{'\u{1F4D6}'}</Text>
+          <Text style={styles.actionLabel}>Journal</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
